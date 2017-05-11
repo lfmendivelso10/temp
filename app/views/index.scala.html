@@ -1,0 +1,36 @@
+@(users: List[Usuario])
+
+@main("NoCopyrightSounds") {
+
+<h2 class="well" align="center">Bienvenido a NoCopyrightSounds @session.get("nombre")</h2>
+
+<div class="content">
+  @for(user <- users){
+  <div class="row">
+    <table class="table table-hover">
+      <tr>
+        <td colspan="2" align="center">
+          <h4><span> <b> Artista: @user.nombre</b></span></h4>
+        </td>
+      </tr>
+      @for(cancion <- user.getCanciones()) {
+      <tr>
+          <td colspan="1">
+            <p> <b>Nombre: </b> @cancion.nombre</p>
+            <br>
+            <p style="text-align:justify;"> <b>Descripción: </b> @cancion.descripcion</p>
+            <br>
+            <p style="text-align:justify;"> <b>Calificación: </b> <h4>5/5</h4> </p>
+          </td>
+          <td colspan="1">
+            <iframe width="250" height="150"
+                    src="@cancion.urlEmbebed()">
+            </iframe>
+          </td>
+      </tr>
+      }
+    </table>
+  </div>
+  }
+</div>
+}

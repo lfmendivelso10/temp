@@ -1,0 +1,91 @@
+@(user: Usuario)
+
+
+@main("Crear un nuevo usuario") {
+<div class="x_title">
+    <h2 class="well">Canciones <small>Crear canción</small></h2>
+    <div class="clearfix"></div>
+</div>
+<div class="content">
+<div class="row" align="center">
+
+<form id="formcancion" name="formcancion" method="post" action="/addCancion" data-parsley-validate class="form-horizontal form-label-left">
+
+    <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Nombre <span class="required">*</span>
+                        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="hidden" id="idUser" name="idUser" value="@user.id" class="form-control col-md-7 col-xs-12">
+            <input type="text" id="nombre" name="nombre" required="required" class="form-control col-md-7 col-xs-12">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descripcion">Descripcion <span class="required">*</span>
+                        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <textarea id="descripcion" name="descripcion" required="required" rows="5" class="form-control col-md-7 col-xs-12"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="url">URL Canción <span class="required">*</span>
+                        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" id="url" name="url" required="required" class="form-control col-md-7 col-xs-12">
+        </div>
+    </div>
+
+    <div class="ln_solid"></div>
+    <div class="form-group">
+        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+            <button type="submit" class="btn btn-success">Agregar</button>
+        </div>
+    </div>
+
+</form>
+</div>
+</div>
+<br>
+<br>
+<div class="content">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2 class="well">Canciones <small>Relación de sus canciones</small></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>URL canción</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @for(cancion <- user.getCanciones()) {
+                            <tr>
+                                <td>
+                                    @cancion.nombre
+                                </td>
+                                <td>
+                                    @cancion.descripcion
+                                </td>
+                                <td>
+                                    @cancion.urlCancion
+                                </td>
+                                <td>
+                                    <a href="/delCancion/@cancion.id" title="Eliminar"><i class="fa fa-times fa-2x"></i></a>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+</div>
+}
